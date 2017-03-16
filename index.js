@@ -1,4 +1,5 @@
 var b = document.getElementById('board');
+
 for (var i = 0; i < 8 ; i++) {
 	var tr = document.createElement('tr');
 	var data = [0,0,0,0,0,0,0,0];
@@ -9,12 +10,13 @@ for (var i = 0; i < 8 ; i++) {
 		var a = document.createElement('a');
 		a.className ='piece';
 		a.id = 'piece' + i + j;
-		var piece = document.getElementById("piece");
-		//piece.innerHTML = "○";
-		//td.onclick = clicked;
 		tr.appendChild(td);
 		td.appendChild(a);
+		var piece = document.getElementById('piece' + i + j);
+		a.innerHTML = "○";
+
 	}
 	b.appendChild(tr);
 }
+
 

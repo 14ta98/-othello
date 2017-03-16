@@ -8,6 +8,7 @@
 
 #board td {
 	border: 2px solid;
+	text-align: center;
 }
 #main{
 	float: left;
