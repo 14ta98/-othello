@@ -1,22 +1,24 @@
-var b = document.getElementById('board');
+/* 初期設定 */
 
-for (var i = 0; i < 8 ; i++) {
-	var tr = document.createElement('tr');
-	var data = [0,0,0,0,0,0,0,0];
-	for (var j = 0; j < 8 ; j++) {
-		var td = document.createElement('td');
-		td.className = 'cell';
-		td.id = 'cell' + i + j;
-		var a = document.createElement('a');
-		a.className ='piece';
-		a.id = 'piece' + i + j;
-		tr.appendChild(td);
-		td.appendChild(a);
-		var piece = document.getElementById('piece' + i + j);
-		a.innerHTML = "○";
+// 駒を定義する処理
+var empty = 0;
+var black = 1;
+var white = 2;
 
+// 盤の中身を配列で初期化する処理
+function InitialBoardData() {
+	var board_data = [];
+	for (var i = 0; i < 8; i++) {
+		board_data[i] = [];
+		for (var j = 0; j < 8; j++) {
+		board_data[i][j] = empty;
+		}
 	}
-	b.appendChild(tr);
+	// 初期配置
+	board_data[4][4] = 1;
+	board_data[5][5] = 1;
+	board_data[4][5] = 2;
+	board_data[5][4] = 2;
 }
 
-
+InitialBoardData();
