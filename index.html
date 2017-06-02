@@ -1,95 +1,96 @@
 <!DOCTYPE html>
 <html lang="ja">
+<script type="text/javascript" src="index.js"></script>
 <head>
 	<meta charset="UTF-8">
 	<title>オセロ</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body onload="InitialBoardData();">
 <div id="wrapper">
 	<div id="main"><!-- 左側 -->
-		<table id="board">
+	  <table id="board">
 	  	<tr>
-				<td><a href="#" onclick="" id="cell"></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick="" class="black">●</a></td>
-				<td><a href="#" onclick="" class="white">●</a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick="" class="white">●</a></td>
-				<td><a href="#" onclick="" class="black">●</a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-			<tr>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-				<td><a href="#" onclick=""></a></td>
-			</tr>
-  	</table>
+			<td><a href="#" onclick="put(0, 0, 1);"></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+			<td><a href="#" onclick=""></a></td>
+		</tr>
+	  </table>
 	</div><!-- 左側終わり -->
 	<div id="detail"><!-- 右側 -->
 	  <div id="turn">
@@ -112,5 +113,4 @@
 	</div><!-- 右側終わり -->
 </div>
 </body>
-<script type="text/javascript" src="index.js"></script>
 </html>
