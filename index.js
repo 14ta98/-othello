@@ -60,11 +60,19 @@ function put(i,j,color){
 //盤に駒があるかチェックする処理
 function check(i,j,color){
   //すでに石がある場合
-  if(board_data[i],[j] != 0){
+  if(board_data[i][j] != 0){
     return false;
   }
   return true;
 }
+
+//盤に駒がある場合の処理
+// fucntion existPiece(i,j,color) {
+// 	if (data[i][j] === black || data[i][j] === white) {
+// 		//return true;
+// 	}
+// }
+
 
 //盤をクリックした際の処理
 function setMark(obj) {
@@ -73,7 +81,15 @@ function setMark(obj) {
 			//盤に駒がない場合の処理
 			if(board_data[i][j] == empty){
 				obj.textContent = "●";
+			} else if (board_data[i][j] == black && board_data[i][j] == white ){
+
 			}
 		}
 	}
+	
 }
+
+
+
+
+
