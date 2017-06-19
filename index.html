@@ -2,6 +2,18 @@
 <html lang="ja">
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+	$(function() {
+  // ボタンクリックで時刻を更新
+  $('td').click(function(e) {
+    if ($(this).textContent != null) {
+    	return;
+    };
+    setMark(this);
+  });
+});
+</script>
+
 <head>
 	<meta charset="UTF-8">
 	<title>オセロ</title>
@@ -12,84 +24,84 @@
 	<div id="main"><!-- 左側 -->
 	  <table id="board">
 	  	<tr>
-			<td onClick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
-			<td onclick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
-			<td onClick="setMark(this)"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 	  </table>
 	</div><!-- 左側終わり -->

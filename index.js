@@ -76,18 +76,31 @@ function check(i,j,color){
 
 //盤をクリックした際の処理
 function setMark(obj) {
-	for (var i = 0; i < 8; i++) {
-		for (var j = 0; j < 8; j++) {
+	// for (var i = 0; i < 8; i++) {
+	// 	for (var j = 0; j < 8; j++) {
 			//盤に駒がない場合の処理
-			if(board_data[i][j] == empty){
-				obj.textContent = "●";
-			} else if (board_data[i][j] == black && board_data[i][j] == white ){
 
+			var cellid = obj.id;
+
+			var first = cellid.slice(4,5);
+			var second = cellid.slice(5,6);
+			if(board_data[first][second] == empty){
+				obj.textContent = "●";
+				//自分の置いたところから、横と縦と斜めのセルを確認する処理を記述する
+				//考え方:隣を一個づつ監視する
+				//
 			}
-		}
-	}
-	
+
 }
+
+
+
+
+
+
+
+
+
 
 
 
