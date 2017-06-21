@@ -23,7 +23,7 @@ function InitialBoardData() {
 	var table = document.getElementById("board");
 	for(var i = 0; i < table.rows.length; i++){
 		for(var j = 0; j < table.rows[i].cells.length; j++){
-			table.rows[i].cells[j].id = "cell" + i + j;
+			table.rows[i].cells[j].id = "cell" + j + i;
 		}
 	}
 	//idごとに値を設定する
@@ -66,25 +66,143 @@ function check(i,j,color){
   return true;
 }
 
+
+var cellid = '';
+var myPut_x = -1;
+var myPut_y = -1;
+//　ひっくり返す最初の駒	
+var end_x = -1
+var end_y = -1;
+// 盤を確認する方向
+var dir_x = +1;
+var dir_y = 0;
+var target_x = myPut_x + dir_x;
+var target_y = myPut_y + dir_y;
+
+var changeFlag = false;
+var changeCount = 0;
+
+//　変数初期化
+function init (obj) {
+	 cellid = obj.id;
+	 myPut_x = parseInt(cellid.slice(4,5));
+	 myPut_y = parseInt(cellid.slice(5,6));
+	//　ひっくり返す最初の駒	
+	 end_x = -1
+	 end_y = -1;
+	// 盤を確認する方向
+	 dir_x = +1;
+	 dir_y = 0;
+	 target_x = myPut_x + dir_x;
+	 target_y = myPut_y + dir_y;
+
+	 changeFlag = false;
+	 changeCount = 0;
+}
+
+
+
 //盤をクリックした際の処理
 function setMark(obj,color) {
-	var cellid = obj.id;
-	var px = parseInt(cellid.slice(4,5));
-	var py = parseInt(cellid.slice(5,6));
-	var bx = -1
-	var by = -1;
-	var dx = +1;
-	var dy = 0;
-	var x = px + dx;
-	var y = py + dy;
-	console.log(x);
-	console.log(y);
-	var f = false;
+	init(obj);
+	if(board_data[myPut_x][myPut_y] === empty){
+		obj.textContent = "●";
+		//　右方向確認
+		dir_x = +1;
+		dir_y = 0;
+		set();
+		init(obj);
+		// 左方向確認
+		dir_x = -1;
+		dir_y = 0;
+		set();
+		init(obj);
+		// 上方向確認
+		dir_x = 0;
+		dir_y = +1;
+		set();
+		init(obj);
+		// 下方向確認
+		dir_x = 0;
+		dir_y = -1;
+		set();
+		init(obj);
+		//　斜め右横上
+		dir_x = +1;
+		dir_y = +1;
+		set();
+		init(obj);
+		//  斜め左横下
+		dir_x = -1;
+		dir_y = -1;
+		set();
+		init(obj);
+		// while((0 <= target_x <= 7) && (0 <= target_y <= 7 )) {
+		// 	if (board_data[target_x][target_y] === empty) {
+		// 		break;
+		// 	} else if (board_data[target_x][target_y] === black) {
+		// 		changeFlag = true;
+		// 		break;
+		// 	} else if (board_data[target_x][target_y] === white) {
+		// 		end_x  = target_x;
+		// 		end_y  = target_y;
+		// 		target_x = target_x+dir_x;
+		// 		target_y = target_y+dir_y;
+				
+		// 	}
+		// } 
+		// //ループ終了後に、f が true ならば（はさんだ相手ゴマがある）、盤面[px+dx][py+dy]～[bx][by]までを自分のコマにする
+		// if (changeFlag) {
+		// 	var x = myPut_x;
+		// 	var y = myPut_y;
+		// 	do {
+		// 		x = x + dir_x;
+		// 		y = y + dir_y;
+		// 		board_data[x][y] = black;
+		// 		document.getElementById('cell' + x + y).textContent = "●";
+		// 	} while (x != end_x || y != end_y)
 
+		// 	// for (var i = 0; i < changeCount; i++) {
+		// 	// 	board_data[myPut_x + dir_x][myPut_y + dir_y] = black;
+		// 	// }
+		// }
 
-	if(board_data[px][py] === empty){
-	obj.textContent = "●";
-	} 
+	} else {
+		alert('既に駒が配置されています。');
+	}
+}
+
+function set () {
+
+		while((0 <= target_x <= 7) && (0 <= target_y <= 7 )) {
+			if (board_data[target_x][target_y] === empty) {
+				break;
+			} else if (board_data[target_x][target_y] === black) {
+				changeFlag = true;
+				break;
+			} else if (board_data[target_x][target_y] === white) {
+				end_x  = target_x;
+				end_y  = target_y;
+				target_x = target_x+dir_x;
+				target_y = target_y+dir_y;
+				
+			}
+		} 
+		//ループ終了後に、f が true ならば（はさんだ相手ゴマがある）、盤面[px+dx][py+dy]～[bx][by]までを自分のコマにする
+		if (changeFlag) {
+			var x = myPut_x;
+			var y = myPut_y;
+			do {
+				x = x + dir_x;
+				y = y + dir_y;
+				board_data[x][y] = black;
+				document.getElementById('cell' + x + y).textContent = "●";
+			} while (x != end_x || y != end_y)
+
+			// for (var i = 0; i < changeCount; i++) {
+			// 	board_data[myPut_x + dir_x][myPut_y + dir_y] = black;
+			// }
+		}
 }
 
 	// 	if (board_data[x][y] === empty) {
