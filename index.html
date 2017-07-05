@@ -115,14 +115,16 @@
 <script type="text/javascript" src="index.js"></script>
 <script>
 	$(function() {
-  	InitialBoardData();
-  	$('td').click(function(e) {
-    	if ($(this).textContent != null) {
-    	return;
-    };
-    setMark(this);
-  });
-});
+	  	InitialBoardData();
+	  	$('td').click(function(e) {
+	    	if ($(this).textContent != null) {
+	    		return;
+	   		 };
+	    	setMark(this);
+	    	test();
+  		});
+	});
+
 </script>
 </body>
 </html>
