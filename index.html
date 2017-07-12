@@ -114,6 +114,15 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <script>
+	//常に監視する
+	$(document).ready(function() {
+    	var a = function() {
+    		test();
+    	};
+    	setInterval(a, 100);
+	});
+
+	//tdクリック時のイベント
 	$(function() {
 	  	InitialBoardData();
 	  	$('td').click(function(e) {
@@ -121,10 +130,15 @@
 	    		return;
 	   		 };
 	    	setMark(this);
-	    	test();
+	    	// test();
   		});
 	});
 
+	// $(function() {
+	// 	$('td').change(function(e) {
+ //    		test();
+ //  		});
+	// });
 </script>
 </body>
 </html>
