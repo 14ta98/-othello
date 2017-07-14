@@ -78,6 +78,17 @@ function InitialBoardData() {
 	}
 }
 
+InitialBoardData();
+
+$('td').click(function(e) { 
+	if ($(this).textContent != null) { 
+		return;
+	}
+	// console.log(this);
+	setPiecesOnBoard(this);
+	//test();	
+});
+
 // 変数初期化
 function init () {
 	// 自分が配置した駒に対する盤（セル）のidを取得する処理　
@@ -270,3 +281,24 @@ function test(){
 		alert("駒を配置できません。");	
 	}
 }
+
+// 盤上にある白駒・黒駒を数える処理
+function countCurrentPiecesOnBoard() { 
+	var blackCount = 0; 
+	var whiteCount = 0;
+	for(var i = 0; i < 8; i++) { 
+		for(var j = 0; j < 8; j++) { 
+			var pieceInfo = board_data[i][j]; 
+			if (pieceInfo === BLACK) { 
+				blackCount++; 
+			} else if (pieceInfo === WHITE) { 
+				whiteCount++; 
+			} 
+		} 
+	}
+	var $blackScore = $('#black_score'); 
+	var $whiteScore = $('#white_score');
+
+	$blackScore.text(blackCount); 
+	$whiteScore.text(whiteCount); 
+};
