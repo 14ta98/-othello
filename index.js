@@ -1,21 +1,23 @@
 /* 初期設定 */
-var empty = 0;
+
+// 駒の有無を定義する
+var EMPTY = 0;
 // 駒の色を定義する処理
-var black = 1;
-var white = 2;
-// 次に配置する駒の色を定義する処理
-var nextColor = 0;
-// 駒の中身を初期化する処理
+var BLACK = 1;
+var WHITE = 2;
+// 盤の中身を配列で初期化する処理
 var board_data = [];
-// 駒の描写を初期化する処理
-var piece = "";
-// 盤のidを初期化する処理
+// 駒の状態を定義する処理
+var piece = '';
+// 先手・後手の駒を定義する処理
+var nextColor = 0;
+// cellのidを初期化する処理
 var cellid = '';
 // 自分が配置する駒の座標を初期化する処理
 var myPut_x = -1;
 var myPut_y = -1;
 //　ひっくり返す最初の駒を定義する処理	
-var end_x = -1
+var end_x = -1;
 var end_y = -1;
 // 盤を確認する方向を定義する処理
 var dir_x = -1;
@@ -23,90 +25,100 @@ var dir_y = -1;
 // 駒をひっくり返す際の対象である駒の位置を初期化する処理
 var target_x = -1;
 var target_y = -1;
-
-
 var changeFlag = false;
-var skipFlag = false;
+var skipFlag = true;
 var checkFlag = false;
 
-// 盤の中身を配列で初期化する処理
-function InitialBoardData() {
+
+
+/*　初期化関数 */
+
+// 盤の生成と盤の中身を初期設定する処理
+function initialBoardOnData() {
+	// 盤の要素を取得する処理
+	var board = document.getElementById("board");
 	for (var i = 0; i < 8; i++) {
 		board_data[i] = [];
+		// 盤の列を生成する処理
+		var tr = document.createElement("tr");	
 		for (var j = 0; j < 8; j++) {
-			board_data[i][j] = empty;
+			// 盤のセルデータを生成する処理
+			var td = document.createElement("td");
+			// 盤のセルデータにidを付与する処理
+			td.id = "cell" + i + j;
+			// 盤の列の下に、生成したセルデータを追加する処理　
+			tr.appendChild(td);
+			// 盤の中身を全て配列で初期化する処理
+			board_data[i][j] = EMPTY;
 		}
+		// 盤の配下に、生成した列を追加する処理
+		board.appendChild(tr);
 	}
-	// 先手に配置する駒を黒に定義する処理
-	nextColor = black;
-	// ゲーム開始時の駒の中身を初期定義する処理
-	board_data[4][4] = 1;
-	board_data[3][3] = 1;
-	board_data[4][3] = 2;
-	board_data[3][4] = 2;
-	// 盤（セル）にidを定義する処理
-	var table = document.getElementById("board");
-	// 8マス分のtr要素を取得する（縦）
-	for(var i = 0; i < table.rows.length; i++){
-		// 8マス分のtr要素を取得する（横）
-		for(var j = 0; j < table.rows[i].cells.length; j++){
-			// 8×8マス分の縦横のセルに対してidを設定する
-			table.rows[i].cells[j].id = "cell" + j + i;
-		}
-	}
-	// 盤の中身に応じて、駒の表示をする処理
+	//初期化した盤に駒を初期配置する処理
+	board_data[4][4] = BLACK;
+	board_data[3][3] = BLACK;
+	board_data[4][3] = WHITE;
+	board_data[3][4] = WHITE;
+
 	for (var i = 0; i < 8; i++) {
 		for (var j = 0; j < 8; j++) {
+			if(board_data[i][j] === EMPTY){
 			// 盤の中身が空の場合の処理
-			if(board_data[i][j] == empty){
-				piece = "";
-			}
-			//　盤の中身が黒の場合の処理
-			else if(board_data[i][j]
-				 == black){
-				piece = "●";
-			}	
-			//	盤の中身が白の場合の処理
-			else if(board_data[i][j] == white){
-				piece = "○";
-			}
-			else {
-				piece = "エラー";
-			}
-			document.getElementById("cell" + i + j).textContent = piece;
+			piece = "";
+		} else if(board_data[i][j] === BLACK){
+			// 盤の中身が黒の場合の処理
+			piece = "●";
+		} else {
+			// 盤の中身が白の場合の処理
+			piece = "○";
+		}
+		document.getElementById("cell" + i + j).textContent = piece;
 		}
 	}
-}
+	countCurrentPiecesOnBoard()	
+};
+
+initialBoardOnData();
+
+$('td').click(function(e) { 
+	if ($(this).textContent != null) { 
+		return;
+	}
+	// console.log(this);
+	setPiecesOnBoard(this);
+	//test();	
+});
+
+
 
 // 変数初期化
 function init () {
-	// 自分が配置した駒に対する盤（セル）のidを取得する処理　
+	// 駒を配置した盤のセルidを取得する処理　
 	myPut_x = parseInt(cellid.slice(4,5));
 	myPut_y = parseInt(cellid.slice(5,6));
 	// 駒をひっくり返す際の対象である駒の位置を取得する処理
 	target_x = myPut_x + dir_x;
 	target_y = myPut_y + dir_y;
 	//　ひっくり返す駒の末端を取得する処理
-	end_x = -1
+	end_x = -1;
 	end_y = -1;
 	//	ひっくり返すかを判別する処理
 	changeFlag = false;
 }
-
-// 盤をクリックした時の処理
-function setMark(obj) {
-	// クリックした盤（セル）のidを取得する処理
+//　盤に駒を配置する際の処理
+function setPiecesOnBoard(obj) {
+	// クリックしたセルのidを取得する処理
 	cellid = obj.id;
 	// 実際にひっくり返す処理を行うため、checkFlagをfalseにする
 	checkFlag = false;
 	init();
 	// 盤の中身が空の場合に実行する処理
-	if(board_data[myPut_x][myPut_y] === empty){
+	if(board_data[myPut_x][myPut_y] === EMPTY){
 		//　次に配置する駒が黒の場合に行う処理
-		if (nextColor === black) {
+		if (nextColor === BLACK) {
 			obj.textContent = "●";
 			//　自分が配置した盤の中身を黒にする処理
-			board_data[myPut_x][myPut_y] = black;
+			board_data[myPut_x][myPut_y] = BLACK;
 		} else {
 			//次に配置する駒が白の場合に行う処理
 			obj.textContent = "○";
@@ -120,14 +132,14 @@ function setMark(obj) {
 			alert('その場所に駒を配置できません');	
 			obj.textContent = '';
 			// 自分が配置した盤の中身を空にする処理
-			board_data[myPut_x][myPut_y] = empty;
+			board_data[myPut_x][myPut_y] = EMPTY;
 		}
 
-		else if (nextColor === black) {
-			nextColor = white;
+		else if (nextColor === BLACK) {
+			nextColor = WHITE;
 			document.getElementById('now_turn').textContent = '白';
 		} else if (nextColor === white) {
-			nextColor = black;
+			nextColor = BLACK;
 			document.getElementById('now_turn').textContent = '黒';
 		} 
 
@@ -136,36 +148,33 @@ function setMark(obj) {
 	} else {
 		alert('既に駒が配置されています。');
 	} 
-	skipFlag = false;
+	
 }	
 
 function set() {
 	// 確認している対象の駒が盤上にある場合に行う処理
 	while(0 <= target_x && target_x <= 7 && 0 <= target_y && target_y <= 7 ) {
 		// 盤上に挟む駒がない場合の処理
-		if (board_data[target_x][target_y] === empty) {
+		if (board_data[target_x][target_y] === EMPTY) {
 			break;
 		// 盤上に自分と同じ色の駒がある場合の処理
 		} else if (board_data[target_x][target_y] === nextColor) {
-			if (end_x!= -1 && end_y!= -1) {
+			if (end_x!== -1 && end_y!== -1) {
 				changeFlag = true;
 			}
 			break;
 		// 盤上に自分と異なる色の駒がある場合の処理
 		} else if (board_data[target_x][target_y] !== nextColor) {
-			// 
 			end_x  = target_x;
 			end_y  = target_y;
 			target_x = target_x+dir_x;
 			target_y = target_y+dir_y;
-			
 		}
 	} 
 	//配置できる場所を確認する処理
 	if (checkFlag && changeFlag) {
 		document.getElementById(cellid).style.backgroundColor　= '#33CC33';
-		//skipFlag = false;
-		return false;
+		skipFlag = false;
 	}
 	//ループ終了後に、f が true ならば（はさんだ相手ゴマがある）、盤面[px+dx][py+dy]～[bx][by]までを自分のコマにする
 	else if (changeFlag) {
@@ -177,7 +186,7 @@ function set() {
 			x = x + dir_x;
 			y = y + dir_y;
 			board_data[x][y] = nextColor;
-			if (nextColor === black) {
+			if (nextColor === BLACK) {
 				document.getElementById('cell' + x + y).textContent = "●";
 			} else {
 				document.getElementById('cell' + x + y).textContent = "○";
@@ -185,58 +194,51 @@ function set() {
 		} while (x != end_x || y != end_y)
 		skipFlag = false;
 	}
-
-	return true;
 }
 
 function checkBoard() {
-	var isSkip;
 	//　右方向確認
 	dir_x = +1;
 	dir_y = 0;
 	init();
-	isSkip &= set();
+	set();
 	// 左方向確認
 	dir_x = -1;
 	dir_y = 0;
 	init();
-	isSkip &= set();
+	set();
 	// 下方向確認
 	dir_x = 0;
 	dir_y = +1;
 	init();
-	isSkip &= set();
+	set();
 	// 上方向確認
 	dir_x = 0;
 	dir_y = -1;
 	init();
-	isSkip &= set();
+	set();
 	//　斜め右下
 	dir_x = +1;
 	dir_y = +1;
 	init();
-	isSkip &= set();
+	set();
 	//	斜め右上
 	dir_x = +1;
 	dir_y = -1;
 	init();
-	isSkip &= set();
+	set();
 	//	斜め左下
 	dir_x = -1;
 	dir_y = +1;
 	init();
-	isSkip &= set();
+	set();
 	//  斜め左上
 	dir_x = -1;
 	dir_y = -1;
 	init();
-	isSkip &= set();
-
-	if(isSkip){
-		skipFlag = true;
-	}
-
+	set();
 }
+
 //配置できる場所の確認
 function isCheck () {
 	// skipFlagを初期化する処理
@@ -251,22 +253,83 @@ function isCheck () {
 
 	for (var i = 0; i < 8; i++) {
 		for (var j = 0; j < 8; j++) {
-			if (board_data[i][j] === empty) {
+			if (board_data[i][j] === EMPTY) {
 				cellid = 'cell' + i + j;
 				checkBoard();
-			};
+			}
 		}
 	}
-}
+};
 
 function test(){
 	//　skipの場合は相手のターンになる
 	if(skipFlag){
-		if (nextColor === black) {
+		if (nextColor === BLACK) {
 			nextColor = white;
 		} else if (nextColor === white) {
-			nextColor = black;
+			nextColor = BLACK;
 		} 
 		alert("駒を配置できません。");	
 	}
 }
+
+	//常に監視する
+	// $(document).ready(function() {
+ //    	var a = function() {
+ //    		test();
+ //    	};
+ //    	setInterval(a, 100);
+	// });
+
+
+
+	// $(function() {
+	// 	$('td').change(function(e) {
+ //    		test();
+ //  		});
+	// });
+// 現在の黒と白の駒の数を数えて表示する関数 
+// 呼び出し箇所はクリックされたときに呼ばれる関数の一番最後に入れる。 
+
+
+// $(function() {
+
+// var a = function() { 
+// test(); 
+// }; 
+// setInterval(a, 100);
+
+ 
+// });
+
+
+// 盤上にある白駒・黒駒を数える処理
+function countCurrentPiecesOnBoard() { 
+	var blackCount = 0; 
+	var whiteCount = 0;
+	for(var i = 0; i < 8; i++) { 
+		for(var j = 0; j < 8; j++) { 
+			var pieceInfo = board_data[i][j]; 
+			if (pieceInfo === BLACK) { 
+				blackCount++; 
+			} else if (pieceInfo === WHITE) { 
+				whiteCount++; 
+			} 
+		} 
+	}
+	var $blackScore = $('#black_score'); 
+	var $whiteScore = $('#white_score');
+
+	$blackScore.text(blackCount); 
+	$whiteScore.text(whiteCount); 
+};
+
+
+
+
+
+
+
+
+
+
